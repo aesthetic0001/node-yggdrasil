@@ -24,7 +24,7 @@ function loader (moduleOptions) {
       {
         accessToken,
         selectedProfile,
-        serverId: utils.mcHexDigest(createHash('sha1').update(serverid).update(sharedsecret).update(serverkey).digest())
+        serverId: serverid ? serverid : utils.mcHexDigest(createHash('sha1').update("").update(sharedsecret).update(serverkey).digest())
       },
       moduleOptions?.agent
     )
