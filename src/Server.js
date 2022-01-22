@@ -13,10 +13,11 @@ function loader (moduleOptions) {
    * @param  {String}   serverid     ASCII encoding of the server ID
    * @param  {String}   sharedsecret Server's secret string
    * @param  {String}   serverkey    Server's encoded public key
+   * @param  {String}   concattedSID    Existing serverid that you have generated
    * @param  {Function} cb           (is okay, data returned by server)
    * @async
    */
-  async function join (accessToken, selectedProfile, serverid, sharedsecret, serverkey) {
+  async function join (accessToken, selectedProfile, serverid, sharedsecret, serverkey, concattedSID = null) {
     return await utils.call(
       moduleOptions?.host ??
       defaultHost,
@@ -24,7 +25,7 @@ function loader (moduleOptions) {
       {
         accessToken,
         selectedProfile,
-        serverId: serverid ? serverid : utils.mcHexDigest(createHash('sha1').update("").update(sharedsecret).update(serverkey).digest())
+        serverId: concattedSID ? concattedSID : utils.mcHexDigest(createHash('sha1').update(serverid).update(sharedsecret).update(serverkey).digest())
       },
       moduleOptions?.agent
     )
