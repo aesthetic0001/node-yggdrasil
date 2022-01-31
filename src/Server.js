@@ -50,7 +50,7 @@ function loader (moduleOptions) {
   }
 
   return {
-    join: utils.callbackify(join, 5),
+    join: utils.callbackify(join, 6),
     hasJoined: utils.callbackify(hasJoined, 4)
   }
 }
